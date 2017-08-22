@@ -1,0 +1,147 @@
+body {
+  background-color: darkslateblue;
+}
+
+.title {
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  font-family: impact;
+  /*text-shadow: 2px 2px #000000;*/
+}
+
+.buttons {
+  padding-top: 50px;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.allStreamers {
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  border-radius: 5px;
+  color: gray;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.3) 20px
+)
+}
+
+.allButton {
+  background-color: Transparent;
+  border: none;
+  outline: 0 !important;
+  color: coral;
+}
+
+.onStreamers {
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  border-radius: 5px;
+  color: gray;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.3) 20px
+)
+}
+
+.onButton {
+  background-color: Transparent;
+  border: none;
+  outline: 0 !important;
+  color: darkseagreen;
+}
+
+.offStreamers {
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  border-radius: 5px;
+  color: gray;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.3) 20px
+)
+}
+
+ .offButton {
+  background-color: Transparent;
+  border: none;
+  outline: 0 !important;
+  color: gray;
+}
+
+.Search {
+  padding: 25px 0px 25px 0px;
+}
+
+input {
+  background: transparent;
+  color: white;
+  border: 2px solid coral;
+  border-radius: 10px;
+  outline: none;
+}
+
+.online {
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 5px;
+  color: darkseagreen;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.3) 20px
+)
+}
+
+.offline {
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 5px;
+  color: gray;
+
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.3) 20px
+)
+}
+
+padding: 0;
+
+dl {
+	margin-bottom: 0px;
+}
+
+.dl-horizontal {
+	padding: 8px;
+  border: 2px solid coral;
+	border-bottom: 5px solid coral;
+	margin-top: 0px;
+}
+
+.icon {
+	padding: 10px;
+}
+
+.offline {
+  padding-bottom: 40px;
+}
+
+.footer {
+  color: white;
+  text-align: center;
+}

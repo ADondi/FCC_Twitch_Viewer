@@ -1,0 +1,144 @@
+//document ready
+$(document).ready(function(){
+
+  //Button actions
+  //All Button
+  $("#allButton").click(function() {
+    $(".online").show(1000);
+	  $(".offline").show(1000);
+  });
+
+	//Online Button - View streamers currently online
+	$("#onButton").click(function() {
+		$(".offline").hide(1000);
+		$(".online").show(1000);
+	});
+
+	//Offline Button - View streamers that are offline
+	$("#offButton").click(function() {
+		$(".online").hide(1000);
+		$(".offline").show(1000);
+	});
+
+  //Twitch API url
+  //In ordder to complete the challange a pass-through to the twitch API URL is required as seen below.
+  //The user ID is not required when using this pass-through
+  var baseChannelURL_2 = "https://wind-bow.gomix.me/twitch-api/channels/";
+  var baseChannelURL = "https://wind-bow.glitch.me/twitch-api/channels/";
+  var baseUserURL = "https://wind-bow.glitch.me/twitch-api/users/";
+  var baseStreamURL = "https://wind-bow.glitch.me/twitch-api/streams/";
+  var userID = "&client_id=9yxp6ejwu232b5i5xdlvp7h7d6a6iq&callback=?";
+  //User list to use for the challenge
+  var userList = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck",
+  "habathcx", "RobotCaleb", "noobs2ninjas", "cincinbear"];
+
+  //make list searchable
+  /*
+  $("#Search").on("keyup", function() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("keyword");
+    filter = input.value.toUpperCase();
+    console.log(filter);
+    ul = document.getElementById("Search");
+    //li = ul.getElementsByTagName("dl-horizontal");
+    li = document.getElementsByClassName("user");
+    console.log(li);
+    a = li[0];
+    //console.log(a);
+    for (i = 0; i < li.length; i++) {
+        a = li[i];
+        console.log(a);
+        if (a.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+});
+*/
+
+  //loop through user list
+  for (var i = 0; i < userList.length; i++){
+    //get user name
+    var userName = userList[i];
+    //create URL
+    var streamURL = baseStreamURL + userName
+
+    //make request
+    requestFcn(userName, streamURL)
+
+    //request function
+    function requestFcn(user, URL){
+      //get JSON data
+      var rawData = $.getJSON(URL, function(data){
+        console.log(data);
+        //get stream info if online
+        if(data.stream !== null){
+          var streamStatus = data.stream.channel.status;
+          var userName = data.stream.channel.display_name;
+          var userIcon = data.stream.channel.logo;
+          var channelURL = data.stream.channel.url;
+          console.log(streamStatus);
+
+          //append info to dl (description list)
+          //each channel will have it's own description list
+          $("section").append(
+          "<dl class='dl-horizontal online'><dt><a href ='" +
+            channelURL +
+            "' target='_blank'><img class='icon img-responsive pull-right' width = '100px' src='" +
+            userIcon +
+            "' alt = 'Icon for the Twitch channel of " +
+            userName +
+            "></a></dt><dd><h4><a class = 'user' href ='"+
+            channelURL +
+            "' target = '_blank'>" +
+            userName +
+            "</a></h4><p class = 'stream'><a href = '" +
+            channelURL +
+            "' target = '_blank'>" +
+            streamStatus +
+            "</a></p><h4 class = 'status'>Online</h4></dd></dl>"
+          );//close append
+
+        } else {
+          //console.log("ELSE");
+          var channelURL = baseChannelURL + user;
+
+          //JSON request for OFFLINE chanels
+          $.getJSON(channelURL, function(OffChannels){
+            //Channel info
+            var OffUserName = OffChannels.display_name;
+            var OffUserIcon = OffChannels.logo;
+            var OffChannelURL = OffChannels.url;
+
+            //Check if user account can be found. If not post the following INFO
+            if (!OffUserName || OffUserIcon === null){
+              $("section").append(
+              "<dl class='dl-horizontal offline'><dt><img class = 'icon img-responsive pull-right' width = '100px' src = 'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_70x70.png' alt = 'Unknown Twitch channel'></dt><dd><h4>Channel for " +
+              user +
+              " is Not Found</h4><h4 class='status'>Offline</h4></dl>"
+              );//close append
+            } else {
+              $("section").append(
+              "<dl class = 'dl-horizontal offline'><dt><a href = '" +
+                OffChannelURL +
+                "' target = '_blank'><img class = 'icon img-responsive pull-right' width = '100px' src ='" + 
+                OffUserIcon +
+                "' alt = 'Icon for the Twitch channel of " +
+                OffUserName +
+                "'></a></dt><dd><a class = 'user' href = '" +
+                OffChannelURL +
+                "' target = '_blank'><h4>" +
+                OffUserName +
+                "</h4></a><h4 class = 'status'>Offline</h4></dd></dl>"
+              );//close append
+            }//close else
+
+          });//close JSON of OFFLINE
+        }//close ELSE after ONLINE
+      });//close JSON for ONLINE
+    }//close function
+
+  }//close FOR
+
+});//close (document).ready
